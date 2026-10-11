@@ -20,6 +20,8 @@ pipeline {
                 }
             }
 
+          }
+
           stage('Deploy') {
             steps {
                 sh 'kubectl set image deployment/hello-app "*=$IMAGE"'
