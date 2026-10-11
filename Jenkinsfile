@@ -1,3 +1,5 @@
+cd ~/hello-app
+cat > Jenkinsfile <<'EOF'
 pipeline {
     agent any
     environment {
@@ -19,15 +21,13 @@ pipeline {
                     sh 'docker push $IMAGE'
                 }
             }
-
-          }
-
-          stage('Deploy') {
+        }
+        stage('Deploy') {
             steps {
                 sh 'kubectl set image deployment/hello-app "*=$IMAGE"'
                 sh 'kubectl rollout status deployment/hello-app --timeout=60s'
-                }
             }
         }
     }
 }
+EOF
